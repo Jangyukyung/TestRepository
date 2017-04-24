@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView id="image" fitHeight="77.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/food01.png" />
+         </image>
+         <HBox.margin>
+            <Insets bottom="5.0" left="5.0" top="5.0" />
+         </HBox.margin>
+      </ImageView>
+      <VBox spacing="5.0">
+         <children>
+            <Label id="name" maxWidth="1.7976931348623157E308" text="음식">
+               <VBox.margin>
+                  <Insets top="2.0" />
+               </VBox.margin></Label>
+            <ImageView id="score" fitHeight="23.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" />
+            <Label id="description" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="내용" VBox.vgrow="ALWAYS" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+   </children>
+</HBox>

@@ -1,0 +1,10 @@
+#root{
+    -fx-padding:10;
+}
+
+#welcome-text{
+    -fx-font-size:35;
+    -fx-font-family:"Arial Black";
+    -fx-font-weight:bold;
+    -fx-text0fill:linear-gradient(to bottom, blue, while);  /*시작,끝*/
+}

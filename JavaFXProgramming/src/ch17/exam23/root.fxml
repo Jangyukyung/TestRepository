@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="200.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch17.exam23.RootController">
+   <children>
+      <Label layoutX="32.0" layoutY="18.0" text="ListView" />
+      <Label layoutX="163.0" layoutY="18.0" text="TableView" />
+      <Label layoutX="402.0" layoutY="18.0" text="ImageView" />
+      <ListView fx:id="listView" layoutX="9.0" layoutY="41.0" prefHeight="110.0" prefWidth="105.0" />
+      <TableView fx:id="tableView" layoutX="129.0" layoutY="41.0" prefHeight="110.0" prefWidth="231.0">
+        <columns>
+          <TableColumn prefWidth="94.0" text="스마트폰" />
+          <TableColumn prefWidth="150.0" text="이미지" />
+        </columns>
+      </TableView>
+      <ImageView fx:id="imageView" fitHeight="110.0" fitWidth="116.0" layoutX="370.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" />
+      <Separator layoutX="12.0" layoutY="159.0" prefHeight="0.0" prefWidth="480.0" />
+      <Button fx:id="btnOk" layoutX="203.0" layoutY="170.0" mnemonicParsing="false" text="확인" />
+      <Button fx:id="btnCancel" layoutX="257.0" layoutY="171.0" mnemonicParsing="false" text="취소" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,22 @@
+package ch12.exam01;
+
+import java.awt.Toolkit;
+
+public class BeepTask implements Runnable{
+	
+	@Override
+	public void run() {
+		//소리를 내는 코드 
+		
+		Toolkit toolkit=Toolkit.getDefaultToolkit();
+		for(int i=0;i<5;i++){
+			toolkit.beep();
+			try{
+				Thread.sleep(500);
+			}catch(InterruptedException e){
+			}	
+		}
+		
+	}
+
+}
