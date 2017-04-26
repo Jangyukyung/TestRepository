@@ -7,8 +7,7 @@ package ch17.exam50;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -55,26 +54,29 @@ public class CallController implements Initializable {
 	 public void initialize(URL location, ResourceBundle resources) {
        // System.out.println(btn1.getText());
 		
-        btn1.setOnAction(event ->{
-             System.out.println("버튼1");
-        });
+//        btn1.setOnAction(event ->{
+//             System.out.println("버튼1");
+//        });
+//		
+//        btn2.setOnAction(event ->{
+//             System.out.println("버튼2 클릭됨");
+//        });
+//        
+//       btn3.setOnAction(event ->{
+//             System.out.println("버튼3 클릭됨");
+//        });
+//        
+//	 btn4.setOnAction(event ->{
+//             System.out.println("버튼4 클릭됨");
+//        });
+//	 
+//        btn5.setOnAction(event ->{
+//            System.out.println("버튼 5 ");
+//        });
 		
-        btn2.setOnAction(event ->{
-             System.out.println("버튼2 클릭됨");
-        });
-        
-       btn3.setOnAction(event ->{
-             System.out.println("버튼3 클릭됨");
-        });
-        
-	 btn4.setOnAction(event ->{
-             System.out.println("버튼4 클릭됨");
-        });
-	 
-        btn5.setOnAction(event ->{
-            System.out.println("버튼 5 ");
-        });
 		
+	
+  
     }
 
     
