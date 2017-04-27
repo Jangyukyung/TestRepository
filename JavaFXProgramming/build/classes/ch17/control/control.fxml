@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="785.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch17.control.ControlController">
+   <top>
+      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+            <ToggleButton fx:id="btnLight" mnemonicParsing="false" prefHeight="70.0" prefWidth="250.0" text="전등">
+               <toggleGroup>
+                  <ToggleGroup fx:id="menuGroup" />
+               </toggleGroup>
+            </ToggleButton>
+            <ToggleButton fx:id="btnGas" mnemonicParsing="false" prefHeight="70.0" prefWidth="250.0" text="가스" toggleGroup="$menuGroup" />
+            <ToggleButton fx:id="btnHeat" mnemonicParsing="false" prefHeight="70.0" prefWidth="250.0" text="난방" toggleGroup="$menuGroup" />
+        </items>
+      </ToolBar>
+   </top>
+   <center>
+      <StackPane fx:id="stackPane" BorderPane.alignment="CENTER">
+         <children>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" />
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>

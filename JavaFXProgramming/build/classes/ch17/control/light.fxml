@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="light" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="785.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch17.control.LightController">
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="785.0" BorderPane.alignment="CENTER">
+         <center>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/fruit2.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/fruit2.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/fruit2.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/fruit2.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+         </center>
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="785.0" spacing="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" text="방1" />
+                  <Button mnemonicParsing="false" text="방2" />
+                  <Button mnemonicParsing="false" text="방3" />
+                  <Button mnemonicParsing="false" text="방4" />
+               </children>
+            </HBox>
+         </bottom>
+      </BorderPane>
+   </center>
+   <bottom>
+      <BorderPane prefHeight="193.0" prefWidth="785.0" BorderPane.alignment="CENTER">
+         <center>
+            <HBox alignment="CENTER" prefHeight="192.0" prefWidth="785.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/fruit2.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/fruit2.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+         </center>
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="785.0" spacing="70.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" text="방5" />
+                  <Button mnemonicParsing="false" text="방6" />
+               </children>
+            </HBox>
+         </bottom>
+      </BorderPane>
+   </bottom>
+</BorderPane>
