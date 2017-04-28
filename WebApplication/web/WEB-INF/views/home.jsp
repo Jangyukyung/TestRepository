@@ -10,8 +10,40 @@
 	<body>
 		WebApplication Home
 		<hr/>
+		<h4>HTML 태그</h4>
+		<a href="html/exam01">exam01</a>
 		
+		<h4>CSS</h4>
+		<a href="html/exam01">exam01</a> 
+		<a href="html/exam02">exam02</a> 
+		<a href="html/exam03">exam03</a> 
+		
+		<h4>JavaScript</h4>
+		<%for(int i=1;i<=11;i++){
+			String exam="exam";
+			if(i<10) {
+				exam+="0"+i;
+			}
+			else {
+				exam+=String.valueOf(i);
+			}%>
+		<a href="javascript/<%=exam%>"><%=exam%></a>
+		<%}%>
+		
+		<h4>JQuery</h4>
+		<%for(int i=1;i<=4;i++){
+			String exam="exam";
+			exam+="0"+i;
+			%>
+		<a href="jquery/<%=exam%>"><%=exam%></a>
+		<%}%>	
+		
+		<h4>BootStrap</h4>
+		<%for(int i=1;i<=3;i++){
+			String exam="exam";
+			exam+="0"+i;
+			%>
+		<a href="bootstrap/<%=exam%>"><%=exam%></a>
+		<%}%>
 	</body>
-	
-	
 </html>
