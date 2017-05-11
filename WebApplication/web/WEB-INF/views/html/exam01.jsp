@@ -1,9 +1,3 @@
-<%-- 
-    Document   : html
-    Created on : 2017. 4. 25, 오후 12:10:50
-    Author     : Administrator
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

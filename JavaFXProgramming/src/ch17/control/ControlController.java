@@ -8,11 +8,14 @@ package ch17.control;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.StackPane;
@@ -44,13 +47,26 @@ public class ControlController implements Initializable {
 		btnLight.setOnAction(e->handleBtnLight(e));
 		btnGas.setOnAction(e->handleBtnGas(e));
 		btnHeat.setOnAction(e->handleBtnHeat(e));
+                
+                menuGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                        String fileName=newValue.getUserData().toString()+".fxml";
+                        try {
+                            stackPane.getChildren().clear();
+                            Parent parent = FXMLLoader.load(getClass().getResource(fileName));
+                            stackPane.getChildren().add(parent);
+                            
+                        } catch (IOException ex) {}
+                      
+                    }
+                });
+               
 	}	
 
 	private void handleBtnLight(ActionEvent e) {
 		try {
-			StackPane xx=new StackPane();
 			Parent parent=FXMLLoader.load(getClass().getResource("light.fxml"));
-			stackPane.getChildren().add(xx);
 			stackPane.getChildren().add(parent);
 			
 		} catch (IOException ex) {

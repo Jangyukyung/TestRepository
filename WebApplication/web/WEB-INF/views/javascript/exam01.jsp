@@ -25,7 +25,7 @@
 			console.log(v4);
 			console.log("v4: " + v4 +" " + typeof(v4));
 			
-			var v5={mid:"white", mname:"홍길동", mage:30};  
+			var v5={mid:"white", mname:"홍길동", mage:30};  //객체 (property:값)
 			console.log(v5);
 			console.log("v5: " + v5 +" " + typeof(v5));
 			
