@@ -38,7 +38,7 @@ public class DualColorLed {
 	}
 	
 	public static void main(String[] args) throws InterruptedException{
-		DualColorLed test=new DualColorLed(RaspiPin.GPIO_00, RaspiPin.GPIO_01);
+		DualColorLed test=new DualColorLed(RaspiPin.GPIO_01, RaspiPin.GPIO_02);
 		test.green();
 		
 		for(int i=0;i<10;i++){;
