@@ -26,7 +26,7 @@
 		<script src="<%=application.getContextPath() %>/resources/bootstrap-3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
     </head>
     <body>
-        <h4>JSTL(Java Standard Tagh Library) 사용하기 </h4>
+        <h4>JSTL(Java Standard Tag Library) 사용하기 </h4>
 		<%for(int i=3;i<7;i++){%>
 			<img src="<%=application.getContextPath() %>/resources/image/photo0<%=i%>.jpg"  width="50px" height="50px"/>
 		<%}%>
