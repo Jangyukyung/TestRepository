@@ -15,7 +15,7 @@
 		<script src="<%=application.getContextPath() %>/resources/bootstrap-3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
     </head>
 <body>
-	<h4> 게시물 목록 </h4>
+	<h4> 게시물 목록 Board</h4>
 	<hr/>
 	<table class="table table-bordered" style="width:700px;">
 			<tr class="success">
@@ -28,12 +28,11 @@
 			<c:forEach var="b" items="${list}">
 				<tr>
 					<td>${b.bno}</td>
-					<td>${b.btitle}</td>
+					<td><a href="exam05Detail?bno=${b.bno}">${b.btitle}</a></td>
 					<td>${b.bwriter}</td>
 					<td>${b.bdate}</td>
 					<td>${b.bhitcount}</td>
 				</tr>
-
 			</c:forEach>
 		</table>
 		
@@ -55,6 +54,10 @@
 				<a href ="exam05?pageNo=${endPageNo+1}">[다음]</a>
 			</c:if>
 			 <a href="exam05?pageNo=${totalPageNo}">[맨끝]</a>
+		</div>
+		
+		<div style="margin-top:10px; width:700px; text-align:right;">
+			<a href="exam02" class="btn btn-success">글쓰기</a>
 		</div>
 </body>
 </html>

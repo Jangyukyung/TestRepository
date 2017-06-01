@@ -84,20 +84,6 @@ public class Exam12DaoImpl implements Exam12Dao	{
 			return bno;
 		}
 	}
-//	@Override	
-//	public void select() {
-//		
-//	}
-//	@Override
-//	public void update() {
-//		
-//	}
-//	@Override
-//	public void delete() {
-//		
-//	}
-	
-	
 
 	@Override
 	public List<Exam12Board> boardSelectAll() {
@@ -184,7 +170,7 @@ public class Exam12DaoImpl implements Exam12Dao	{
 			
 				board.setBno(rs.getInt("bno"));
 				board.setBtitle(rs.getString("btitle"));
-				board.setBwriter(rs.getString(3));
+				board.setBwriter(rs.getString(4));
 				board.setBdate(rs.getDate("bdate"));
 				board.setBhitcount(rs.getInt("bhitcount"));
 				list.add(board);
@@ -207,7 +193,6 @@ public class Exam12DaoImpl implements Exam12Dao	{
 		}
 	}
 		
-	
 	@Override
 	public int boardCountAll() {
 		int count=0;
@@ -247,7 +232,185 @@ public class Exam12DaoImpl implements Exam12Dao	{
 			return count;
 		}
 	}
-	/////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	@Override
+	public Exam12Board boardSelectByBno(int bno) {
+		Exam12Board board=null;
+		
+		Connection conn=null;
+		try {
+			//JDBC Driver 클래스 로딩
+			Class.forName("oracle.jdbc.OracleDriver");
+			//연결 문자열 작성
+			String url ="jdbc:oracle:thin:@localhost:1521:orcl";
+			//연결 객체 얻기
+			conn=DriverManager.getConnection(url, "iotuser", "iot12345");
+			LOGGER.info("연결 성공");
+			//SQL 작성
+			String sql="select * from board where bno=? ";
+			
+			//SQL 문을 전송해서 실행
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			
+			ResultSet rs=pstmt.executeQuery();
+			
+			if(rs.next()){
+				board= new Exam12Board();
+				board.setBno(rs.getInt("bno"));
+				board.setBtitle(rs.getString("btitle"));
+				board.setBcontent(rs.getString("bcontent"));
+				board.setBwriter(rs.getString("bwriter"));
+				board.setBdate(rs.getDate("bdate"));
+				board.setBpassword(rs.getString("bpassword"));
+				board.setBhitcount(rs.getInt("bhitcount"));
+				board.setBoriginalfilename(rs.getString("boriginalfilename"));
+				board.setBsavedfilename(rs.getString("bsavedfilename"));
+				board.setBfilecontent(rs.getString("bfilecontent"));
+			}
+			
+			rs.close();
+			pstmt.close();
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			// 연결 끊기
+			try {
+				conn.close();
+				LOGGER.info("연결 끊김");
+			} catch (SQLException e) {
+			}
+			return board;
+		}
+	}
+	
+	@Override
+	public void boardUpdateBhitcount(int bno, int bhitcount) {
+		Connection conn=null;
+		try {
+			//JDBC Driver 클래스 로딩
+			Class.forName("oracle.jdbc.OracleDriver");
+			//연결 문자열 작성
+			String url ="jdbc:oracle:thin:@localhost:1521:orcl";
+			//연결 객체 얻기
+			conn=DriverManager.getConnection(url, "iotuser", "iot12345");
+			LOGGER.info("연결 성공");
+			//SQL 작성
+			String sql="update board set bhitcount=? where bno=?";
+			
+			//SQL 문을 전송해서 실행
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, bhitcount);
+			pstmt.setInt(2, bno);
+			
+			pstmt.executeUpdate();
+			
+			pstmt.close();
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// 연결 끊기
+			try {
+				conn.close();
+				LOGGER.info("연결 끊김");
+			} catch (SQLException e) {}
+		}
+	}
+	
+	@Override
+	public void boardUpdate(Exam12Board board) {
+		Connection conn=null;
+		try {
+			//JDBC Driver 클래스 로딩
+			Class.forName("oracle.jdbc.OracleDriver");
+			//연결 문자열 작성
+			String url ="jdbc:oracle:thin:@localhost:1521:orcl";
+			//연결 객체 얻기
+			conn=DriverManager.getConnection(url, "iotuser", "iot12345");
+			LOGGER.info("연결 성공");
+			//SQL 작성
+			
+			String sql;
+			if(board.getBoriginalfilename()!=null){
+				sql="update board set btitle=?, bcontent=?, bpassword=?,bdate=sysdate,  boriginalfilename=?,  bsavedfilename=?, bfilecontent=? where bno=?";
+			}else{
+				sql="update board set btitle=?, bcontent=?, bpassword=?,bdate=sysdate where bno=?";
+			}
+			
+			//SQL 문을 전송해서 실행
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, board.getBtitle());
+			pstmt.setString(2, board.getBcontent());
+			pstmt.setString(3, board.getBpassword());
+			if(board.getBoriginalfilename()!=null){
+				pstmt.setString(4, board.getBoriginalfilename());
+				pstmt.setString(5, board.getBsavedfilename());
+				pstmt.setString(6, board.getBfilecontent());
+				pstmt.setInt(7, board.getBno());
+			}else{
+				pstmt.setInt(4, board.getBno());
+			}
+			pstmt.executeUpdate();
+			
+			pstmt.close();
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// 연결 끊기
+			try {
+				conn.close();
+				LOGGER.info("연결 끊김");
+			} catch (SQLException e) {}
+		}
+	}
+	
+	@Override
+	public void boardDelete(int bno) {
+		Connection conn=null;
+		try {
+			//JDBC Driver 클래스 로딩
+			Class.forName("oracle.jdbc.OracleDriver");
+			//연결 문자열 작성
+			String url ="jdbc:oracle:thin:@localhost:1521:orcl";
+			//연결 객체 얻기
+			conn=DriverManager.getConnection(url, "iotuser", "iot12345");
+			LOGGER.info("연결 성공");
+			//SQL 작성
+			
+			String sql="delete from board where bno=?";
+			
+			//SQL 문을 전송해서 실행
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			
+			pstmt.executeUpdate();
+			
+			pstmt.close();
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// 연결 끊기
+			try {
+				conn.close();
+				LOGGER.info("연결 끊김");
+			} catch (SQLException e) {}
+		}
+	}
+	
+	/////Member////////////////////////////////////////////////////////////////////////////////////////////
+	
 @Override
 	public String memberInsert(Exam12Member member) {
 		String mid=null;
@@ -296,8 +459,7 @@ public class Exam12DaoImpl implements Exam12Dao	{
 			try {
 				conn.close();
 				LOGGER.info("연결 끊김");
-			} catch (SQLException e) {
-			}
+			} catch (SQLException e) {}
 			return mid;
 		}
 	}
@@ -363,7 +525,6 @@ public class Exam12DaoImpl implements Exam12Dao	{
 		}
 	}
 	
-	
 	@Override
 	public int memberCountAll() {
 		int count=0;
@@ -403,7 +564,121 @@ public class Exam12DaoImpl implements Exam12Dao	{
 			return count;
 		}
 	}
-	///////////////////////////////////////////////////////////
+	
+	@Override
+	public Exam12Member memberSelectByMid(String mid) {
+		Exam12Member member=null;
+		
+		Connection conn=null;
+		try {
+			//JDBC Driver 클래스 로딩
+			Class.forName("oracle.jdbc.OracleDriver");
+			//연결 문자열 작성
+			String url ="jdbc:oracle:thin:@localhost:1521:orcl";
+			//연결 객체 얻기
+			conn=DriverManager.getConnection(url, "iotuser", "iot12345");
+			LOGGER.info("연결 성공");
+			//SQL 작성
+			String sql="select * from member where mid=? ";
+			
+			//SQL 문을 전송해서 실행
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			
+			ResultSet rs=pstmt.executeQuery();
+			
+			if(rs.next()){
+				member= new Exam12Member();
+				member.setMid(rs.getString("mid"));
+				member.setMname(rs.getString("mname"));
+				LOGGER.info(rs.getString("mname"));
+				member.setMpassword(rs.getString("mpassword"));
+				member.setMdate(rs.getDate("mdate"));
+				member.setMtel(rs.getString("mtel"));
+				member.setMemail(rs.getString("memail"));
+				member.setMage(rs.getInt("mage"));
+				member.setMaddress(rs.getString("maddress"));
+				member.setMoriginalfilename(rs.getString("moriginalfilename"));
+				member.setMsavedfilename(rs.getString("msavedfilename"));
+				member.setMfilecontent(rs.getString("mfilecontent"));
+			}
+			
+			rs.close();
+			pstmt.close();
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			// 연결 끊기
+			try {
+				conn.close();
+				LOGGER.info("연결 끊김");
+			} catch (SQLException e) {
+			}
+			return member;
+		}
+	}
+	
+	@Override
+	public void memberUpdate(Exam12Member member) {
+		Connection conn=null;
+		try {
+			//JDBC Driver 클래스 로딩
+			Class.forName("oracle.jdbc.OracleDriver");
+			//연결 문자열 작성
+			String url ="jdbc:oracle:thin:@localhost:1521:orcl";
+			//연결 객체 얻기
+			conn=DriverManager.getConnection(url, "iotuser", "iot12345");
+			LOGGER.info("연결 성공");
+			//SQL 작성
+			
+			String sql;
+			if(member.getMoriginalfilename()!=null){
+				sql="update member set mname=?, mpassword=?, mdate=sysdate, mtel=?, memail=?, mage=?, maddress=?,  moriginalfilename=?,  msavedfilename=?, mfilecontent=? where mid=?";
+			}else{
+				sql="update member set mname=?, mpassword=?, mdate=sysdate ,mtel=?, memail=?, mage=?, maddress=? where mid=?";
+			}
+			
+			//SQL 문을 전송해서 실행
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, member.getMname());
+			LOGGER.info(member.getMname());
+			LOGGER.info(member.getMpassword());
+			LOGGER.info(member.getMtel());
+			pstmt.setString(2, member.getMpassword());
+			pstmt.setString(3, member.getMtel());
+			pstmt.setString(4, member.getMemail());
+			pstmt.setInt(5, member.getMage());
+			pstmt.setString(6, member.getMaddress());
+			if(member.getMoriginalfilename()!=null){
+				pstmt.setString(7, member.getMoriginalfilename());
+				pstmt.setString(8, member.getMsavedfilename());
+				pstmt.setString(9, member.getMfilecontent());
+				pstmt.setString(10, member.getMid());
+			}else{
+				pstmt.setString(7, member.getMid());
+			}
+			pstmt.executeUpdate();
+			
+			pstmt.close();
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// 연결 끊기
+			try {
+				conn.close();
+				LOGGER.info("연결 끊김");
+			} catch (SQLException e) {}
+		}
+		
+	}
+	/////Test//////////////////////////////////////////////////////
+	
 	public static void main(String[] args){
 		Exam12DaoImpl test=new Exam12DaoImpl();
 //		for (int i = 1; i <= 100; i++) {
@@ -443,8 +718,5 @@ public class Exam12DaoImpl implements Exam12Dao	{
 		for (Exam12Member member : list) {
 			LOGGER.info(member.getMid());
 		}
-		
 	}
-	
-	
 }

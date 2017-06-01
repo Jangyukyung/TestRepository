@@ -106,3 +106,13 @@ from(
 )
 --where r>=((pageNo-1)*rowsPerPage+1);
 where r>=((2-1)*10+1);
+
+/*
+행 수 구하기
+*/
+--전체 행수 구하기
+select count(*) from board;
+select count(bno) from board;
+select count(boriginalfilename) from board;
+--특정 조건에 맞는 행수 구하기
+select count(*) from board where bwriter <> '유경';
