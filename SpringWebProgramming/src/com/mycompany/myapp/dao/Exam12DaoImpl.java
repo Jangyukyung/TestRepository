@@ -8,10 +8,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.crypto.Data;
+import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.mycompany.myapp.dto.Exam12Board;
@@ -20,17 +21,20 @@ import com.mycompany.myapp.dto.Exam12Member;
 @Component
 public class Exam12DaoImpl implements Exam12Dao	{
 	private static final Logger LOGGER=LoggerFactory.getLogger(Exam12DaoImpl.class);	
+	@Autowired
+	private DataSource dataSource;
 	@Override
 	public int boardInsert(Exam12Board board) {
 		int bno=-1;
 		Connection conn=null;
 		try {
 			//JDBC Driver 클래스 로딩
-			Class.forName("oracle.jdbc.OracleDriver");
+			//Class.forName("oracle.jdbc.OracleDriver");
 			//연결 문자열 작성
-			String url ="jdbc:oracle:thin:@localhost:1521:orcl";
+			//String url ="jdbc:oracle:thin:@localhost:1521:orcl";
 			//연결 객체 얻기
-			conn=DriverManager.getConnection(url, "iotuser", "iot12345");
+			//conn=DriverManager.getConnection(url, "iotuser", "iot12345");
+			conn=dataSource.getConnection();
 			LOGGER.info("연결 성공");
 			//SQL 작성
 			String sql="insert into board ";
@@ -69,9 +73,6 @@ public class Exam12DaoImpl implements Exam12Dao	{
 //			conn.close();
 //			LOGGER.info("연결 끊김");
 
-			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
@@ -79,11 +80,11 @@ public class Exam12DaoImpl implements Exam12Dao	{
 			try {
 				conn.close();
 				LOGGER.info("연결 끊김");
-			} catch (SQLException e) {
-			}
-			return bno;
+			} catch (SQLException e) {}
 		}
+			return bno;
 	}
+	
 
 	@Override
 	public List<Exam12Board> boardSelectAll() {
@@ -539,7 +540,7 @@ public class Exam12DaoImpl implements Exam12Dao	{
 			conn=DriverManager.getConnection(url, "iotuser", "iot12345");
 			LOGGER.info("연결 성공");
 			//SQL 작성
-			String sql="select count(*) from board ";
+			String sql="select count(*) from member ";
 			
 			//SQL 문을 전송해서 실행
 			PreparedStatement pstmt=conn.prepareStatement(sql);

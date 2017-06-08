@@ -13,8 +13,18 @@
 		<script src="<%=application.getContextPath() %>/resources/jquery/jquery-3.2.1.min.js" type="text/javascript"></script>
 		
 		<script src="<%=application.getContextPath() %>/resources/bootstrap-3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
+    
+    <style type="text/css">
+    	.layer{
+    		position:absolute;
+    		top:40%;
+    		left:50%;
+    		transform:translate(-50%,-50%)
+    	}
+    	</style>
     </head>
 <body>
+<div class="layer" style="font-family:sans-serif; ; text-align:center;">
 	<h4> 게시물 쓰기 </h4>
 	<hr/>
 	<form method="post"  style="padding: 0px 20px;" enctype="multipart/form-data">
@@ -79,5 +89,6 @@
 			
 			<input type="submit" class="btn btn-info" value="글쓰기"/>
 		</form>
+		</div>
 </body>
 </html>

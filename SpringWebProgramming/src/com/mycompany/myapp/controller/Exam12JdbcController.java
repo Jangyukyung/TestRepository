@@ -1,17 +1,24 @@
 package com.mycompany.myapp.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +31,8 @@ import com.mycompany.myapp.service.Exam12Service;
 @Controller
 public class Exam12JdbcController {
 	private static final Logger LOGGER=LoggerFactory.getLogger(Exam12JdbcController.class);
+//	@Resource(name="exam12ServiceImpl2")
+//	private Exam12Service service;
 	@Autowired
 	private Exam12Service service;
 	
@@ -67,7 +76,6 @@ public class Exam12JdbcController {
 		String realPath=servletContext.getRealPath("/WEB-INF/upload/");
 		File file=new File(realPath+fileName);
 		board.getBattach().transferTo(file);
-		
 		
 		//서비스 객체에 요청 처리 요청
 		service.boardWrite(board);
@@ -286,4 +294,112 @@ public class Exam12JdbcController {
 		return "redirect:/jdbc/exam06Detail?mid=" + member.getMid();
 	}
 
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	@RequestMapping("/jdbc/exam07")
+	public String exam07(@RequestParam(defaultValue="1")int pageNo ,Model model){
+		int rowsPerPage=5;
+		int totalRows=service.memberTotalRows();
+		int totalPageNo=(totalRows/rowsPerPage)+((totalRows%rowsPerPage!=0)?1:0);
+		
+		int pagesPerGroup=5;
+		int totalGroupNo=(totalPageNo/pagesPerGroup)+((totalPageNo%pagesPerGroup!=0)?1:0);
+		int groupNo=(pageNo-1) /pagesPerGroup +1;
+		int startPageNo=(groupNo-1)*pagesPerGroup+1;
+		int endPageNo=startPageNo+pagesPerGroup-1;
+		if(groupNo==totalGroupNo){ endPageNo=totalPageNo;}
+		List<Exam12Member> list=service.memberListPage(pageNo, rowsPerPage);
+		
+		model.addAttribute("list",list);
+		model.addAttribute("pagesPerGroup", pagesPerGroup);
+		model.addAttribute("totalPageNo", totalPageNo);
+		model.addAttribute("totalGroupNo", totalGroupNo);
+		model.addAttribute("groupNo", groupNo);
+		model.addAttribute("startPageNo", startPageNo);
+		model.addAttribute("endPageNo", endPageNo);
+		model.addAttribute("pageNo", pageNo);
+		
+		return "jdbc/exam07";
+	}
+
+	@RequestMapping("/jdbc/exam07Detail")
+	public String exam07Detail(String mid,Model model){
+		Exam12Member member=service.getMember(mid);
+		model.addAttribute("member",member);
+		
+		return "jdbc/exam07Detail";
+	}
+	
+	@RequestMapping("jdbc/exam07CheckMpassword")
+	public String exam07CheckMpassword(String mid, String mpassword, Model model){
+		String result=service.memberCheckMpassword(mid, mpassword);
+		model.addAttribute("result",result);
+		
+		return "jdbc/exam07CheckMpassword";
+	}
+	
+	@RequestMapping(value="jdbc/exam07Update", method=RequestMethod.GET)
+	public String exam07UpdateGet(String mid, Model model){
+		Exam12Member member=service.getMember(mid);
+		model.addAttribute("member",member);
+		
+		return "jdbc/exam07Update";
+	}
+	
+	@RequestMapping(value="jdbc/exam07Update", method=RequestMethod.POST)
+	public String exam07UpdatePost(Exam12Member member) throws IllegalStateException, IOException{
+		//첨부 파일이 변경 여부 검사 
+		if(!member.getMattach().isEmpty()){
+			//첨부 파일에 대한 정보를 컬럼값으로 설정
+			member.setMoriginalfilename(member.getMattach().getOriginalFilename());
+			member.setMfilecontent(member.getMattach().getContentType());
+			String fileName=new Date().getTime()+"-" +member.getMoriginalfilename();
+			member.setMsavedfilename(fileName);
+			
+			//첨부 파일을 서버 로컬 시스템에 저장
+			String realPath=servletContext.getRealPath("/WEB-INF/upload/");
+			File file=new File(realPath+fileName);
+			member.getMattach().transferTo(file);
+		}
+		
+		//게시물 수정 처리
+		service.memberUpdate(member);
+		
+		return "redirect:/jdbc/exam07Detail?mid=" + member.getMid();
+	}
+	
+	@RequestMapping("/jdbc/file/image")
+	public void download(HttpServletResponse response,@RequestHeader("User-Agent") String userAgent, String mid) throws Exception{
+		//응답 HTTP 헤더행을 추가
+		//1) 파일의 이름 (옵션)
+		Exam12Member member = service.getMember(mid);
+		LOGGER.info(member.getMid());
+		String fileName=member.getMsavedfilename();
+		LOGGER.info(member.getMsavedfilename());
+		String encodingFileName;
+		if(userAgent.contains("MSIE") || userAgent.contains("Trident") || userAgent.contains("Edge")){
+			encodingFileName =URLEncoder.encode(fileName, "UTF-8");
+		}else{
+			encodingFileName=new String(fileName.getBytes("UTF-8"),"ISO-8859-1");
+		}
+		
+		response.addHeader("Content-Disposition","attachment;filename=\"" +encodingFileName+ "\" ");
+		
+		//2) 파일의 종류(필수)
+		response.addHeader("Content-Type", member.getMfilecontent());
+		//3) 파일의 크기(옵션)
+		File file=new File(servletContext.getRealPath("/WEB-INF/upload/" + fileName));
+		long fileSize=file.length();
+		response.addHeader("Content-Length",String.valueOf(fileSize));
+
+		//응답 HTTP 본문에 파일 데이터를 출력 
+		OutputStream os=response.getOutputStream();
+		FileInputStream fis=new FileInputStream(file);
+		FileCopyUtils.copy(fis, os);
+		os.flush();
+		fis.close();
+		os.close();
+	}
+	
 }

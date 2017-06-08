@@ -13,12 +13,15 @@
 		<script src="<%=application.getContextPath() %>/resources/jquery/jquery-3.2.1.min.js" type="text/javascript"></script>
 		
 		<script src="<%=application.getContextPath() %>/resources/bootstrap-3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
+    
+    
     </head>
 <body>
 	<h4> 게시물 목록 Member</h4>
 	<hr/>
 	<table class="table table-bordered" style="width:700px;">
 			<tr class="success">
+				
 				<td>아이디</td>
 				<td>이름</td>
 				<td>비밀번호</td>
@@ -27,9 +30,11 @@
 				<td>이메일</td>
 				<td>나이</td>
 				<td>주소</td>
+				<td>사진</td>
 			</tr>
 			<c:forEach var="m" items="${list}">
 				<tr>
+					
 					<td><a href="exam06Detail?mid=${m.mid}">${m.mid}</a></td>
 					<td>${m.mname}</td>
 					<td>${m.mpassword}</td>
@@ -38,6 +43,7 @@
 					<td>${m.memail}</td>
 					<td>${m.mage}</td>
 					<td>${m.maddress}</td>
+					<%-- <td><img src="file/image?mid=${m.mid}"/></td> --%>
 				</tr>
 			</c:forEach>
 		</table>
@@ -48,10 +54,12 @@
 				<a href ="exam06?pageNo=${startPageNo-1}">[이전]</a>
 			</c:if>
 			
-			<c:forEach var="i" begin="${startPageNo}" end="${endPageNo }">
+			<c:forEach var="i" begin="${startPageNo}" end="${endPageNo}">
 				&nbsp;
-					<a href="exam06?pageNo=${i}" <c:if test="${pageNo==i}">
-					style="font-weight: bold; color: red;"</c:if>>${i}</a>
+					<a href="exam06?pageNo=${i}"
+					<c:if test="${pageNo==i}">
+					style="font-weight: bold; color: red;"</c:if>>
+					${i}</a>
 				&nbsp;
 				
 			</c:forEach>
