@@ -17,9 +17,9 @@
     <style type="text/css">
     	.layer{
     		position:absolute;
-    		top:40%;
+    		top:10%;
     		left:50%;
-    		transform:translate(-50%,-50%)
+    		transform:translate(-50%,-0%)
     	}
     	</style>
     	
@@ -27,7 +27,7 @@
 <body>
 	
 	<div class="layer" style="font-family:sans-serif; ; text-align:center;">
-	<h2 style="font-family:sans-serif; ; text-align:center; font-weight: bold;"> 게시물 목록 Member</h2>
+	<h2 style="font-family:sans-serif; ; text-align:center; font-weight: bold;"> Project</h2>
 	<hr/>
 	<div align="right">
 		<a href="exam03" class="btn btn-default" style="margin:5px">글쓰기</a>
@@ -39,12 +39,12 @@
 				<td>번호</td>
 				<td>사진</td>
 				<td>이름</td>
-				<td>비밀번호</td>
+				<!-- <td>비밀번호</td> -->
 				<td>날짜</td>
-				<td>전화번호</td>
+				<td>내용</td>
 				<!-- <td>이메일</td> -->
-				<td>나이</td>
-				<td>주소</td>
+				<!-- <td>나이</td>
+				<td>주소</td> -->
 				
 				 </tr>
 			<c:forEach var="m" items="${list}">
@@ -53,12 +53,12 @@
 					<td><a href="exam07Detail?mid=${m.mid}">${m.mid}</a></td>
 					<td><img src="file/image?mid=${m.mid}" width="100px"/></td>
 					<td>${m.mname}</td>
-					<td>${m.mpassword}</td>
+					<%-- <td>${m.mpassword}</td> --%>
 					<td>${m.mdate}</td>
 					<td>${m.mtel}</td>
 					<%-- <td>${m.memail}</td> --%>
-					<td>${m.mage}</td>
-					<td>${m.maddress}</td>
+					<%-- <td>${m.mage}</td>
+					<td>${m.maddress}</td> --%>
 					
 				</tr>
 			</c:forEach>

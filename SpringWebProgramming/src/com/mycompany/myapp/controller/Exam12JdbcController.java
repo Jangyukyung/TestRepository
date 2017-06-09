@@ -31,10 +31,10 @@ import com.mycompany.myapp.service.Exam12Service;
 @Controller
 public class Exam12JdbcController {
 	private static final Logger LOGGER=LoggerFactory.getLogger(Exam12JdbcController.class);
-//	@Resource(name="exam12ServiceImpl2")
-//	private Exam12Service service;
-	@Autowired
+	@Resource(name="exam12ServiceImpl2")
 	private Exam12Service service;
+//	@Autowired
+//	private Exam12Service service;
 	
 	@Autowired
 	private ServletContext servletContext;
@@ -121,7 +121,7 @@ public class Exam12JdbcController {
 		//서비스 객체에 요청 처리 요청
 		service.memberJoin(member);
 	
-		return "redirect:/";
+		return "jdbc/exam07";
 	}
 	
 	
@@ -367,6 +367,12 @@ public class Exam12JdbcController {
 		service.memberUpdate(member);
 		
 		return "redirect:/jdbc/exam07Detail?mid=" + member.getMid();
+	}
+	
+	@RequestMapping("/jdbc/exam07Delete")
+	public String exam07Delete(String mid) {
+		service.memberDelete(mid);
+		return "redirect:/jdbc/exam07";
 	}
 	
 	@RequestMapping("/jdbc/file/image")

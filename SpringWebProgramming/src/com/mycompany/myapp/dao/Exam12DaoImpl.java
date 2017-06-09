@@ -592,7 +592,6 @@ public class Exam12DaoImpl implements Exam12Dao	{
 				member= new Exam12Member();
 				member.setMid(rs.getString("mid"));
 				member.setMname(rs.getString("mname"));
-				LOGGER.info(rs.getString("mname"));
 				member.setMpassword(rs.getString("mpassword"));
 				member.setMdate(rs.getDate("mdate"));
 				member.setMtel(rs.getString("mtel"));
@@ -661,6 +660,44 @@ public class Exam12DaoImpl implements Exam12Dao	{
 			}else{
 				pstmt.setString(7, member.getMid());
 			}
+			pstmt.executeUpdate();
+			
+			pstmt.close();
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// 연결 끊기
+			try {
+				conn.close();
+				LOGGER.info("연결 끊김");
+			} catch (SQLException e) {}
+		}
+		
+	}
+	
+	
+	@Override
+	public void memberDelete(String mid) {
+		Connection conn=null;
+		try {
+			//JDBC Driver 클래스 로딩
+			Class.forName("oracle.jdbc.OracleDriver");
+			//연결 문자열 작성
+			String url ="jdbc:oracle:thin:@localhost:1521:orcl";
+			//연결 객체 얻기
+			conn=DriverManager.getConnection(url, "iotuser", "iot12345");
+			LOGGER.info("연결 성공");
+			//SQL 작성
+			
+			String sql="delete from member where mid=?";
+			
+			//SQL 문을 전송해서 실행
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			
 			pstmt.executeUpdate();
 			
 			pstmt.close();

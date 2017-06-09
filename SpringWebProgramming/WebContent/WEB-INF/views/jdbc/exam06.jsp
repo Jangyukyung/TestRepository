@@ -30,7 +30,7 @@
 				<td>이메일</td>
 				<td>나이</td>
 				<td>주소</td>
-				<td>사진</td>
+				
 			</tr>
 			<c:forEach var="m" items="${list}">
 				<tr>
@@ -43,7 +43,7 @@
 					<td>${m.memail}</td>
 					<td>${m.mage}</td>
 					<td>${m.maddress}</td>
-					<%-- <td><img src="file/image?mid=${m.mid}"/></td> --%>
+					
 				</tr>
 			</c:forEach>
 		</table>

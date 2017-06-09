@@ -23,14 +23,14 @@
     				return;
     			}
     			$.ajax({
-    				url: "exam06CheckMpassword",
+    				url: "exam07CheckMpassword",
     				method:"post",
     				
     				data:{"mid":"${member.mid}","mpassword":mpassword},
     				success:function(data){
     					if(data.result=="success"){
     							console.log("success");
-    							location.href="exam06Update?mid=${member.mid}";
+    							location.href="exam07Update?mid=${member.mid}";
     					}else{
     						$("#mpassword").val("");
     						$("#mpassword").attr("placeholder","비밀번호를 입력하셔야 합니다.");
@@ -48,13 +48,13 @@
     				return;
     			}
     			$.ajax({
-    				url: "exam06CheckMpassword",
+    				url: "exam07CheckMpassword",
     				method:"post",
     				data:{"mid":"${member.mid}","mpassword":mpassword},
     				success:function(data){
     					if(data.result=="success"){
     							console.log("success");
-    							location.href="exam06Delete?mid=${member.mid}";
+    							location.href="exam07Delete?mid=${member.mid}";
     							
     					}else{
     						$("#mpassword").val("");

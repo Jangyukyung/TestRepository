@@ -36,6 +36,8 @@ public interface Exam12Service {
 
 	public void memberUpdate(Exam12Member member);
 
+	public void memberDelete(String mid);
+
 	
 	
 }

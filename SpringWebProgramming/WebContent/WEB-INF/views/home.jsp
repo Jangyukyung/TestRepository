@@ -30,7 +30,7 @@
 				} else {
 					exam += String.valueOf(i);
 				}%>
-		<a href="javascript/<%=exam%>" class="btn btn-primary"><%=exam%></a>
+		<a href="javascript/<%=exam%>" class="btn btn-info"><%=exam%></a>
 		<%}%>
 
 		<h4>JQuery</h4>
@@ -46,7 +46,7 @@
 				String exam = "exam";
 				exam += "0" + i;
 		%>
-		<a href="bootstrap/<%=exam%>" class="btn btn-primary"><%=exam%></a>
+		<a href="bootstrap/<%=exam%>" class="btn btn-warning"><%=exam%></a>
 		<%}%>
 
 		<h4>JSP</h4>
@@ -54,7 +54,7 @@
 				String exam = "exam";
 				exam += "0" + i;
 		%>
-		<a href="jsp/<%=exam%>" class="btn btn-primary"><%=exam%></a>
+		<a href="jsp/<%=exam%>" class="btn btn-success"><%=exam%></a>
 		<%}%>
 
 		<h4>HTTP</h4>
@@ -100,7 +100,7 @@
 		<a href="jdbc/exam04" class="btn btn-primary">게시물 목록</a> 
 		<a href="jdbc/exam05" class="btn btn-primary">게시물 페이지 목록</a> 
 		<a href="jdbc/exam06" class="btn btn-primary">member 페이지 목록</a> 
-		<a href="jdbc/exam07" class="btn btn-primary">게시판</a> 
+		<a href="jdbc/exam07" class="btn btn-danger">게시판</a> 
 		
 	
 
