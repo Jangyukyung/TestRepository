@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 public class PCA9685 {
 	//Field
 	private static PCA9685 singleton;
-	public static PCA9685 getInstanceo() throws Exception{
+	public static PCA9685 getInstance() throws Exception{
 		if(singleton==null){
 			singleton=new PCA9685();
 		}
@@ -100,7 +100,7 @@ public class PCA9685 {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		PCA9685 pca9685 = PCA9685.getInstanceo();
+		PCA9685 pca9685 = PCA9685.getInstance();
 		
 		pca9685.setStep(PWM_08, 164);Thread.sleep(2000);
 		pca9685.setStep(PWM_08, 358);Thread.sleep(2000);

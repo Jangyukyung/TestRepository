@@ -29,9 +29,9 @@ import com.mycompany.myapp.dto.Exam12Member;
 import com.mycompany.myapp.service.Exam12Service;
 
 @Controller
-public class Exam12JdbcController {
-	private static final Logger LOGGER=LoggerFactory.getLogger(Exam12JdbcController.class);
-	@Resource(name="exam12ServiceImpl2")
+public class Exam12DBController {
+	private static final Logger LOGGER=LoggerFactory.getLogger(Exam12DBController.class);
+	@Resource(name="exam12ServiceImpl3")
 	private Exam12Service service;
 //	@Autowired
 //	private Exam12Service service;

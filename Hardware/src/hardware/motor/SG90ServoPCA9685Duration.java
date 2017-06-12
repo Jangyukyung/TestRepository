@@ -44,7 +44,7 @@ public class SG90ServoPCA9685Duration {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		PCA9685 pca9685=PCA9685.getInstanceo();
+		PCA9685 pca9685=PCA9685.getInstance();
 		SG90ServoPCA9685Duration servo= new SG90ServoPCA9685Duration(pca9685, PCA9685.PWM_15);
 		
 		/*

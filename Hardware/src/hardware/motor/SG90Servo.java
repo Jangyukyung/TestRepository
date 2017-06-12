@@ -54,11 +54,12 @@ public class SG90Servo {
 		SG90Servo test=new SG90Servo(RaspiPin.GPIO_01 , 8, 25);
 		for(int i=0; i<180 ; i+=10){
 			test.setAngle(i);
-			Thread.sleep(1000);
+			Thread.sleep(100000);
 		}
 		
 		test.setAngle(0);
-		Thread.sleep(1000);
+		Thread.sleep(100000);
 	}
+
 	
 }

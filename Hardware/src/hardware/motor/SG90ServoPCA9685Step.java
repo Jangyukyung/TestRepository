@@ -45,7 +45,7 @@ public class SG90ServoPCA9685Step {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		PCA9685 pca9685=PCA9685.getInstanceo();
+		PCA9685 pca9685=PCA9685.getInstance();
 		SG90ServoPCA9685Step servo= new SG90ServoPCA9685Step(pca9685, PCA9685.PWM_11);
 		
 		

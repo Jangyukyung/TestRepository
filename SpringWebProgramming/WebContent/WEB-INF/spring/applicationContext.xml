@@ -24,7 +24,7 @@
 	</bean>
 	
 	<!-- MyBatis 설정 -->
-	<!-- <bean name="sqlSessionFactory" 
+	<bean name="sqlSessionFactory" 
 				class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations" value="/WEB-INF/mybatis/*.xml"/>
@@ -34,5 +34,5 @@
 				class="org.mybatis.spring.SqlSessionTemplate">
 				<constructor-arg ref="sqlSessionFactory"/>
 	</bean>
-	 -->
+	 
 </beans>
