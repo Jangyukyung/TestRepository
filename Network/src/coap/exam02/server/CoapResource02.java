@@ -26,7 +26,11 @@ public class CoapResource02 extends CoapResource{
 			@Override
 			public void run() {
 				while(true){
-					distance=ultrasonicSensor.getDistance();
+					try{
+						distance=ultrasonicSensor.getDistance();
+					}catch(Exception e){
+						e.printStackTrace();
+					}
 					try{Thread.sleep(100);} catch(Exception e){}
 				}
 			}
@@ -37,7 +41,7 @@ public class CoapResource02 extends CoapResource{
 	//Method
 	@Override
 	public void handleGET(CoapExchange exchange) {
-		String kind=exchange.getRequestOptions().getUriQuery().get(0).split("=")[0];
+		String kind=exchange.getRequestOptions().getUriQuery().get(0).split("=")[1];
 		String angle=exchange.getRequestOptions().getUriQuery().get(1).split("=")[1];
 		
 		if(kind.equals("ultrasonicsensor")){

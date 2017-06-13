@@ -13,7 +13,8 @@ public class CoapResource02Client {
 	//Constructor
 	public CoapResource02Client(){
 		coapClient=new CoapClient();
-		
+		coapClient.useCONs();
+		//coapClient.useNONs();
 	}
 	
 	//Method

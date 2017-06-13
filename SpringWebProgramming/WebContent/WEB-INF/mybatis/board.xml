@@ -67,5 +67,13 @@
 		update board set btitle=#{btitle}, bcontent=#{bcontent}, bpassword=#{bpassword},bdate=sysdate where bno=#{bno}
 	</if>
 	</update>
+	
+	<delete id="delete" parameterType="map" >
+		delete from board where bno=#{bno}
+	</delete>
+
+
 </mapper>
+
+
   

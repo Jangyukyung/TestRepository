@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset=UTF-8">
+        <meta charset=UTF-8>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <title>JSP Page</title>
 		<link href="<%=application.getContextPath() %>/resources/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -40,6 +40,15 @@
 			<div class="form-group">
 				<div class="input-group">
 					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-lock"></span>
+					</span>
+					<input type="password" class="form-control" placeholder="비밀번호" name="mpassword"  value="${member.mpassword}"/>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-addon">
 						<span class="glyphicon glyphicon-tag"></span>
 					</span>
 					<input type="text" class="form-control" placeholder="전화번호" name="mtel"  value="${member.mtel}"/>
@@ -64,9 +73,9 @@
 			<div class="form-group">
 				<div class="input-group">
 					<span class="input-group-addon">
-						<span class="glyphicon glyphicon-lock"></span>
+						<span class="glyphicon glyphicon-tag"></span>
 					</span>
-					<input type="password" class="form-control" placeholder="비밀번호" name="mpassword"  value="${member.mpassword}"/>
+					<input type="text" class="form-control" placeholder="주소" name="maddress"  value="${member.maddress}"/>
 				</div>
 			</div>
 			

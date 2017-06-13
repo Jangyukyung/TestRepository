@@ -121,7 +121,7 @@ public class Exam12DBController {
 		//서비스 객체에 요청 처리 요청
 		service.memberJoin(member);
 	
-		return "jdbc/exam07";
+		return "redirect:/jdbc/exam06";
 	}
 	
 	

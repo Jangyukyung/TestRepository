@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset=UTF-8">
+        <meta charset=UTF-8>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <title>JSP Page</title>
 		<link href="<%=application.getContextPath() %>/resources/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -58,6 +58,15 @@
 						<span class="glyphicon glyphicon-lock"></span>
 					</span>
 					<input type="text" class="form-control" placeholder="전화번호" name="mtel"/>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-lock"></span>
+					</span>
+					<input type="text" class="form-control" placeholder="이메일" name="memail"/>
 				</div>
 			</div>
 			<div class="form-group">
