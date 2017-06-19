@@ -10,14 +10,14 @@ public class PhotoresistorSensorRgbLedTest {
 		PCF8591 pcf8591=new PCF8591(0x48, PCF8591.AIN0);
 		PhotoresistorSensor photo=new PhotoresistorSensor(pcf8591);
 		
-		RgbLedPWM test = new RgbLedPWM(RaspiPin.GPIO_00, RaspiPin.GPIO_02, RaspiPin.GPIO_03);
+		RgbLedPWM test = new RgbLedPWM(RaspiPin.GPIO_04, RaspiPin.GPIO_05, RaspiPin.GPIO_06);
 
 
 		
 		while(true){
 			double value=photo.getValue();
 			
-			test.ledColorSet(255, 0, 0);
+			test.ledColorSet(0, 0, 0);
 			System.out.println(value);
 			Thread.sleep(1000);
 			

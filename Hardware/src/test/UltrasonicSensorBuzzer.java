@@ -8,9 +8,9 @@ import java.io.IOException;
 public class UltrasonicSensorBuzzer {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
-		UltrasonicSensor ultra = new UltrasonicSensor(RaspiPin.GPIO_00, RaspiPin.GPIO_01);
+		UltrasonicSensor ultra = new UltrasonicSensor(RaspiPin.GPIO_28, RaspiPin.GPIO_29);
 
-		ActiveBuzzer test = new ActiveBuzzer(RaspiPin.GPIO_02);
+		ActiveBuzzer test = new ActiveBuzzer(RaspiPin.GPIO_24);
 
 		
 		while (true) {

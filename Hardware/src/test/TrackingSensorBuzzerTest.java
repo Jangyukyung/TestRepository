@@ -9,9 +9,9 @@ import java.io.IOException;
 public class TrackingSensorBuzzerTest {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
-		TrackingSensor tracking = new TrackingSensor(RaspiPin.GPIO_00);
+		TrackingSensor tracking = new TrackingSensor(RaspiPin.GPIO_26);
 
-		ActiveBuzzer test = new ActiveBuzzer(RaspiPin.GPIO_01);
+		ActiveBuzzer test = new ActiveBuzzer(RaspiPin.GPIO_24);
 
 		
 		tracking.setGpioPinListenerDigital(event ->{

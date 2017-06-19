@@ -1,4 +1,4 @@
-package http;
+package http.exam01;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,27 +7,32 @@ import java.io.InputStreamReader;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.json.JSONObject;
 
-public class Exam01 {
+public class HttpGetClient {
 	//Field
 
 	//Constructor
 	//Method
 	public static void main(String[] args) throws IOException {
-		CloseableHttpClient httpclient = HttpClients.createDefault();
+		CloseableHttpClient httpClient = HttpClients.createDefault();
 		try {
-			HttpGet httpget = new HttpGet("http://192.168.3.130:8080/IoTWebProgramming/http/exam01");
+			URIBuilder uriBuilder =new URIBuilder("http://192.168.3.130:8080/IoTWebProgramming/http/exam01");
+			uriBuilder.setParameter("thermistor", String.valueOf(25));
+			uriBuilder.setParameter("photoresistor", String.valueOf(200));
+			
+			HttpGet httpGet = new HttpGet(uriBuilder.build());
 
-			CloseableHttpResponse response = httpclient.execute(httpget);
+			CloseableHttpResponse response = httpClient.execute(httpGet);
 			try {
-				HttpEntity entity = response.getEntity();
-				if (entity != null) {
-					InputStream instream = entity.getContent();
+				HttpEntity resEntity = response.getEntity();
+				if (resEntity != null) {
+					InputStream is = resEntity.getContent();
 					try {
-						InputStreamReader isr= new InputStreamReader(instream);
+						InputStreamReader isr= new InputStreamReader(is);
 						BufferedReader br=new BufferedReader(isr);
 						String json="";
 						while(true){
@@ -36,13 +41,16 @@ public class Exam01 {
 							json+=data;
 						}
 						JSONObject jsonObject=new JSONObject(json);
-						String temperature=jsonObject.getString("temperature");
-						System.out.println(temperature);
+						double thermistor=jsonObject.getDouble("thermistor");
+						double photoresistor=jsonObject.getDouble("photoresistor");
+						
+						System.out.println("thermistor: "+ thermistor);
+						System.out.println("photoresistor" + photoresistor);
 						//System.out.println("success");
 					} catch (Exception e) {
 						e.printStackTrace();
 					} finally {
-						instream.close();
+						is.close();
 					}
 				}
 			} finally {
@@ -51,7 +59,7 @@ public class Exam01 {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			httpclient.close();
+			httpClient.close();
 		}
 	}
 }
