@@ -26,3 +26,6 @@
 /Network/build/
 /Network/dist/
 /SensingCarWebControl/target/
+/SensingCar/nbproject/private/
+/SensingCar/build/
+/SensingCar/dist/
