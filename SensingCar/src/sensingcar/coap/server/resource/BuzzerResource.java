@@ -13,21 +13,29 @@ public class BuzzerResource extends CoapResource{
 	private static final Logger logger=LoggerFactory.getLogger(BuzzerResource.class);
 	private ActiveBuzzer buzzer;
 	private String currStatus;
+	private static BuzzerResource instance;
 	
 	//Constructor
 	public BuzzerResource() throws Exception{
 		super("buzzer");
+		instance=this; //현재만든 객체를 instance에 저장 
 		buzzer=new ActiveBuzzer(RaspiPin.GPIO_24);
 		off();
 	}
 	
 	//Method
-	private void on(){
+	public static BuzzerResource getInstance(){
+		
+		return instance;
+		
+	}
+	
+	public void on(){
 		buzzer.on();
 		currStatus="on";
 	}
 	
-	private void off(){
+	public void off(){
 		buzzer.off();
 		currStatus="off";
 	}
@@ -53,10 +61,11 @@ public class BuzzerResource extends CoapResource{
 			}
 			JSONObject responseJsonObject=new JSONObject();
 			responseJsonObject.put("result","success");
-			responseJsonObject.put("angle",currStatus);
+			responseJsonObject.put("status",currStatus);
 			String responseJson=responseJsonObject.toString();
 			exchange.respond(responseJson);
 		}catch(Exception e){
+			logger.info(e.toString());
 			JSONObject responseJsonObject=new JSONObject();
 			responseJsonObject.put("result","fail");
 			

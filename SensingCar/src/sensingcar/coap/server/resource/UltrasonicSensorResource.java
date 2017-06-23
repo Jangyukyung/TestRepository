@@ -42,11 +42,11 @@ public class UltrasonicSensorResource extends CoapResource{
 				while(true){
 					try{
 						currDistance=ultrasonicSensor.getDistance();
+						Thread.sleep(500);
 						if(count==2){
 							changed();  //handleGET 실행
 							count=0;
 						}
-						
 						count++;
 					}catch(Exception e){
 						logger.info(e.toString());

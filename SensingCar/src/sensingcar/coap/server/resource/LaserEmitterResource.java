@@ -18,7 +18,7 @@ public class LaserEmitterResource extends CoapResource{
 	public LaserEmitterResource() throws Exception{
 		super("laseremitter");
 		laserEmitter=new LaserEmitter(RaspiPin.GPIO_25);
-		
+		off();
 	}
 	
 	//Method
@@ -38,31 +38,30 @@ public class LaserEmitterResource extends CoapResource{
 
 	@Override
 	public void handlePOST(CoapExchange exchange) {
-		//{"command":"change","status":"on"}
-		//"commane":"status"}
-		try{
-			String requestJson=exchange.getRequestText();
-			JSONObject requestJsonObject= new JSONObject(requestJson);
-			String command=requestJsonObject.getString("command");
-			if(command.equals("change")){
-				String status=requestJsonObject.getString("status");
+		//{ "command":"change", "status":"on" }
+		//{ "command":"status" }
+		try {
+			String requestJson = exchange.getRequestText();
+			JSONObject requestJsonObject = new JSONObject(requestJson);
+			String command = requestJsonObject.getString("command");
+			if(command.equals("change")) {
+				String status = requestJsonObject.getString("status");
 				if(status.equals("on")) on();
 				else if(status.equals("off")) off();
-			}else if(command.equals("status")){
-
+			} else if(command.equals("status")) {
 			}
-			JSONObject responseJsonObject=new JSONObject();
-			responseJsonObject.put("result","success");
-			responseJsonObject.put("angle",currStatus);
-			String responseJson=responseJsonObject.toString();
+			JSONObject responseJsonObject = new JSONObject();
+			responseJsonObject.put("result", "success");
+			responseJsonObject.put("status", currStatus);
+			String responseJson = responseJsonObject.toString();
 			exchange.respond(responseJson);
-		}catch(Exception e){
-			JSONObject responseJsonObject=new JSONObject();
-			responseJsonObject.put("result","fail");
-			
-			String responseJson=responseJsonObject.toString();
+		} catch(Exception e) {
+			logger.info(e.toString());
+			JSONObject responseJsonObject = new JSONObject();
+			responseJsonObject.put("result", "fail");
+			String responseJson = responseJsonObject.toString();
 			exchange.respond(responseJson);
-		}
+		}		
 	}
 	
 }
