@@ -62,9 +62,9 @@
 							<div style="background: linear-gradient(#737373, black); color: white; height:600px; padding: 5px;">
 								<div style="text-align: center; font-size: 18px; font-style: italic; font-weight: bold;">Camera 장치 제어</div>
 								
-								<%-- <div style="text-align: center">현재 상태: <span id="cameraStatus">leftright=${leftright} ; updown=${updown}</span></div>
+								<div style="text-align: center">현재 상태: <span id="cameraStatus">leftright=${leftright} ; updown=${updown}</span></div>
 								<br/>
-								<div style="text-align: center;">
+								<%-- <div style="text-align: center;">
 									좌우<br/>
 									<button id="btnLeftright180" type="button" class="btn btn-danger" onclick="camera('change', '180', '${updown}')">&lt;&lt;</button> 
 									<button id="btnLeftright135" type="button" class="btn btn-warning" onclick="camera('change', '135', '${updown}')">&lt;</button> 
